@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ChatGPT Text Cleaner</title>
+  <!-- ใช้ TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
+    <h1 class="text-2xl font-bold mb-4">ChatGPT Text Cleaner</h1>
+    <textarea id="inputText" rows="8" class="w-full border rounded p-2 mb-4" placeholder="วางข้อความที่นี่..."></textarea>
+    <div class="flex items-center mb-4 space-x-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="removeBold" class="form-checkbox" checked/>
+        <span class="ml-2">ลบ <code>**</code> ตัวหนา</span>
+      </label>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="removeHeadings" class="form-checkbox" checked/>
+        <span class="ml-2">ลบ <code>#</code> หัวข้อ</span>
+      </label>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="trimWhitespace" class="form-checkbox"/>
+        <span class="ml-2">ตัดช่องว่างส่วนเกิน</span>
+      </label>
+    </div>
+    <button id="cleanBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+      Clean
+    </button>
+    <textarea id="outputText" rows="8" class="w-full border rounded p-2 mt-4" placeholder="ผลลัพธ์..."></textarea>
+  </div>
+
+  <script>
+    function cleanText(text) {
+      let result = text;
+      if (document.getElementById('removeBold').checked) {
+        result = result.replace(/\*\*(.*?)\*\*/gs, '$1');
+      }
+      if (document.getElementById('removeHeadings').checked) {
+        result = result.replace(/^#+\s*(.*)/gm, '$1');
+      }
+      if (document.getElementById('trimWhitespace').checked) {
+        result = result.replace(/^[ \t]+|[ \t]+$/gm, '');
+        result = result.replace(/\n{2,}/g, '\n\n');
+      }
+      return result;
+    }
+
+    document.getElementById('cleanBtn').addEventListener('click', () => {
+      const input = document.getElementById('inputText').value;
+      const cleaned = cleanText(input);
+      const output = document.getElementById('outputText');
+      output.value = cleaned;
+      output.focus();
+      output.select();
+    });
+  </script>
+</body>
+</html>
