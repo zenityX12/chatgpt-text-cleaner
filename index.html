@@ -9,6 +9,8 @@
 </head>
 <body class="bg-gray-100 p-8">
   <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow">
+    <!-- พัฒนาโดย ZenityX AI Studio -->
+    <p class="text-sm text-gray-500 mb-2">พัฒนาโดย ZenityX AI Studio</p>
     <h1 class="text-2xl font-bold mb-4">ChatGPT Text Cleaner</h1>
     <textarea id="inputText" rows="8" class="w-full border rounded p-2 mb-4" placeholder="วางข้อความที่นี่..."></textarea>
 
@@ -28,6 +30,10 @@
       <label class="inline-flex items-center">
         <input type="checkbox" id="replaceBullets" class="form-checkbox"/>
         <span class="ml-2">แทนที่ <code>•</code> ด้วย <code>-</code></span>
+      </label>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="replaceTab" class="form-checkbox"/>
+        <span class="ml-2">แทนที่ <code>Tab</code> ด้วย <code>space</code></span>
       </label>
       <label class="inline-flex items-center col-span-2">
         <input type="checkbox" id="removeEmojis" class="form-checkbox"/>
@@ -61,13 +67,15 @@
       if (document.getElementById('replaceBullets').checked) {
         result = result.replace(/•/g, '-');
       }
+      // แทนที่ Tab ด้วย space
+      if (document.getElementById('replaceTab').checked) {
+        result = result.replace(/\t/g, ' ');
+      }
       // ลบอีโมจิ
       if (document.getElementById('removeEmojis').checked) {
-        // ใช้ Unicode property escapes กำจัด Extended Pictographic
         try {
           result = result.replace(/\p{Extended_Pictographic}/gu, '');
         } catch (e) {
-          // fallback ถ้าไม่รองรับ Unicode property escapes
           result = result.replace(/[\u{1F300}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
         }
       }
