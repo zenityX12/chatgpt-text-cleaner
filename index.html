@@ -35,6 +35,10 @@
         <input type="checkbox" id="replaceTab" class="form-checkbox" checked/>
         <span class="ml-2">แทนที่ <code>Tab</code> ด้วย <code>space</code></span>
       </label>
+      <label class="inline-flex items-center">
+        <input type="checkbox" id="removeAsterisk" class="form-checkbox" checked/>
+        <span class="ml-2">ลบ <code>*</code> ตัวเดียว</span>
+      </label>
       <label class="inline-flex items-center col-span-2">
         <input type="checkbox" id="removeEmojis" class="form-checkbox"/>
         <span class="ml-2">ลบอีโมจิทั้งหมด</span>
@@ -70,6 +74,10 @@
       // แทนที่ Tab ด้วย space
       if (document.getElementById('replaceTab').checked) {
         result = result.replace(/\t/g, ' ');
+      }
+      // ลบ * ตัวเดียว
+      if (document.getElementById('removeAsterisk').checked) {
+        result = result.replace(/\*/g, '');
       }
       // ลบอีโมจิ
       if (document.getElementById('removeEmojis').checked) {
