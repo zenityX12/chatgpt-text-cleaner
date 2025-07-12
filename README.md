@@ -5,7 +5,7 @@
 
 ## วิธีใช้งาน
 
-1. เปิดเว็บแอพ (URL ตาม GitHub Pages)
+1. เปิดเว็บแอพ - https://zenityx12.github.io/chatgpt-text-cleaner/
 2. วางข้อความลงในช่องบน
 3. เลือกตัวเลือกที่ต้องการ
 4. กดปุ่ม **Clean**
